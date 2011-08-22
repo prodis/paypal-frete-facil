@@ -1,6 +1,8 @@
 # encoding: utf-8
-
 require 'rubygems'
+require 'rake'
+require './lib/paypal/fretefacil/version'
+
 require 'bundler'
 begin
   Bundler.setup(:default, :development)
@@ -9,7 +11,6 @@ rescue Bundler::BundlerError => e
   $stderr.puts "Run `bundle install` to install missing gems"
   exit e.status_code
 end
-require 'rake'
 
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
@@ -17,10 +18,12 @@ Jeweler::Tasks.new do |gem|
   gem.name = "paypal-frete-facil"
   gem.homepage = "http://github.com/prodis/paypal-frete-facil"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Cálculo de frete do Frete Fácil do PayPal.}
+  gem.description = %Q{Cálculo de frete utilizando o Web Service do Frete Fácil do PayPal.}
   gem.email = "prodis@gmail.com"
-  gem.authors = ["Prodis"]
+  gem.authors = ["Prodis a.k.a. Fernando Hamasaki"]
+  gem.version = PayPal::FreteFacil::Version::VERSION
+  gem.required_ruby_version = ">= 1.8.7"
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
