@@ -1,5 +1,5 @@
 # encoding: UTF-8
-require 'net/http'
+require 'net/https'
 require 'uri'
 
 module PayPal
@@ -17,7 +17,7 @@ module PayPal
         http.verify_mode = OpenSSL::SSL::VERIFY_NONE
 
         request = Net::HTTP::Post.new(@uri.path)
-        request["Content-Type"] = "text/xml"
+        request["Content-Type"] = "text/xml; charset=utf-8"
         request["SoapAction"] = "#{URL}/getPreco"
         request.body = request_body_for(frete)
 
