@@ -23,7 +23,7 @@ Jeweler::Tasks.new do |gem|
   gem.email = "prodis@gmail.com"
   gem.authors = ["Prodis a.k.a. Fernando Hamasaki"]
   gem.version = PayPal::FreteFacil::Version::VERSION
-  gem.required_ruby_version = ">= 1.8.7"
+  gem.required_ruby_version = ">= 1.9"
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new

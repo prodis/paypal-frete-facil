@@ -19,16 +19,22 @@ Gem::Specification.new do |s|
     ".document",
     ".rspec",
     "Gemfile",
+    "Gemfile.lock",
     "README.rdoc",
     "Rakefile",
     "lib/paypal-frete-facil.rb",
+    "lib/paypal/fretefacil/frete.rb",
+    "lib/paypal/fretefacil/parser.rb",
+    "lib/paypal/fretefacil/version.rb",
+    "lib/paypal/fretefacil/web_service.rb",
+    "paypal-frete-facil.gemspec",
     "spec/paypal-frete-facil_spec.rb",
     "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/prodis/paypal-frete-facil}
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
-  s.required_ruby_version = Gem::Requirement.new(">= 1.8.7")
+  s.required_ruby_version = Gem::Requirement.new(">= 1.9")
   s.rubygems_version = %q{1.6.1}
   s.summary = %q{Cálculo de frete do Frete Fácil do PayPal.}
 
