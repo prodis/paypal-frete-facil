@@ -1,19 +1,84 @@
 = paypal-frete-facil
 
-Description goes here.
+Cálculo de frete através do Frete Fácil do PayPal.
 
-== Contributing to paypal-frete-facil
- 
-* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
-* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
-* Fork the project
-* Start a feature/bugfix branch
-* Commit and push until you are happy with your contribution
-* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+== Instalando
+
+=== Gemfile
+  gem 'paypal-frete-facil'
+
+=== Instalação direta
+  $ gem install paypal-frete-facil
+
+
+== Usando
+
+  require 'paypal-frete-facil'
+
+  frete = PayPal::FreteFacil::Frete.new :cep_origem => "04094-050",
+                                        :cep_destino => "90619-900",
+                                        :largura => 15,
+                                        :altura => 2,
+                                        :profundidade => 30,
+                                        :peso => 0.3
+
+  frete.calcular  # => 13.873999999999999
+  frete.calculate # => 13.873999999999999
+
+=== Maneiras de configurar atributos no construtor de Correios::Frete::Calculador
+
+==== Com um hash
+  frete = PayPal::FreteFacil::Frete.new :cep_origem => "04094-050",
+                                        :cep_destino => "90619-900",
+                                        :largura => 15,
+                                        :altura => 2,
+                                        :profundidade => 30,
+                                        :peso => 0.3
+
+==== Com um bloco
+  frete = PayPal::FreteFacil::Frete.new do |f|
+    f.cep_origem = "04094-050"
+    f.cep_destino = "90619-900"
+    f.largura = 15
+    f.altura = 2
+    f.profundidade = 30
+    f.peso = 0.3
+  end
+
+
+=== Atributos de PayPal::FreteFacil::Frete
+
+==== String
+  cep_origem, cep_destino
+==== Fixnum
+  largura, altura, profundidade
+==== Float
+  peso
 
 == Copyright
 
-Copyright (c) 2011 Prodis. See LICENSE.txt for
-further details.
+(The MIT License)
+
+{Prodis a.k.a. Fernando Hamasaki}[http://prodis.blog.br]
+
+Copyright (c) 2011 Prodis
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
