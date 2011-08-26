@@ -5,6 +5,7 @@ module PayPal
       attr_accessor :cep_origem, :cep_destino
       attr_accessor :largura, :altura, :profundidade
       attr_accessor :peso
+      attr_writer :web_service, :parser
 
       DEFAULT_OPTIONS = {
         :largura => 0,
