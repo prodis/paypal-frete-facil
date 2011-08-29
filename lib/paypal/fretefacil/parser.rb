@@ -5,7 +5,7 @@ module PayPal
   module FreteFacil
     class Parser
       def parse(xml)
-        Nokogiri::XML(xml).xpath("//return").text.to_f
+        Nokogiri::XML(xml).xpath("//return").text.to_f.round(2)
       end
     end
   end
