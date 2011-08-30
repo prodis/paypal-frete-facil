@@ -6,7 +6,7 @@ module PayPal
   module FreteFacil
     class WebService
       URL = "https://ff.paypal-brasil.com.br/FretesPayPalWS/WSFretesPayPal"
-      
+
       def initialize
         @uri = URI.parse(URL)
       end
@@ -64,7 +64,8 @@ module PayPal
       end
 
       def format_headers_for(http)
-        http.each_header.map { |name, value| "#{name}: #{value}" }.join("\n")
+        # I'm using an empty block in each_header method for Ruby 1.8.7 compatibility.
+        http.each_header{}.map { |name, values| "#{name}: #{values.first}" }.join("\n")
       end
 
       def with_line_break
