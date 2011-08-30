@@ -18,8 +18,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "paypal-frete-facil"
   gem.homepage = "http://github.com/prodis/paypal-frete-facil"
   gem.license = "MIT"
-  gem.summary = %Q{Cálculo de frete do Frete Fácil do PayPal.}
-  gem.description = %Q{Cálculo de frete utilizando o Web Service do Frete Fácil do PayPal.}
+  gem.summary = %Q{Cálculo de frete do PayPal Frete Fácil.}
+  gem.description = %Q{Cálculo de frete através do PayPal Frete Fácil (http://www.paypal-brasil.com.br/fretefacil).}
   gem.email = "prodis@gmail.com"
   gem.authors = ["Prodis a.k.a. Fernando Hamasaki"]
   gem.version = PayPal::FreteFacil::Version::VERSION

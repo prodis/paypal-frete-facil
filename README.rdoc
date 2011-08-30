@@ -1,6 +1,6 @@
 = paypal-frete-facil
 
-Cálculo de frete através do PayPal Frete Fácil (http://www.paypal-brasil.com.br/fretefacil/).
+Cálculo de frete através do PayPal Frete Fácil (http://www.paypal-brasil.com.br/fretefacil).
 
 == Instalando
 

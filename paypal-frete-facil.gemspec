@@ -5,12 +5,12 @@
 
 Gem::Specification.new do |s|
   s.name = %q{paypal-frete-facil}
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Prodis a.k.a. Fernando Hamasaki"]
   s.date = %q{2011-08-29}
-  s.description = %q{Cálculo de frete utilizando o Web Service do Frete Fácil do PayPal.}
+  s.description = %q{Cálculo de frete através do PayPal Frete Fácil (http://www.paypal-brasil.com.br/fretefacil).}
   s.email = %q{prodis@gmail.com}
   s.extra_rdoc_files = [
     "README.rdoc"
@@ -38,7 +38,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.required_ruby_version = Gem::Requirement.new(">= 1.8.7")
   s.rubygems_version = %q{1.6.1}
-  s.summary = %q{Cálculo de frete do Frete Fácil do PayPal.}
+  s.summary = %q{Cálculo de frete do PayPal Frete Fácil.}
 
   if s.respond_to? :specification_version then
     s.specification_version = 3
