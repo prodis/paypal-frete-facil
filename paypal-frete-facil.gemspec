@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{paypal-frete-facil}
-  s.version = "0.0.3"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Prodis a.k.a. Fernando Hamasaki"]
@@ -23,6 +23,7 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "lib/paypal-frete-facil.rb",
+    "lib/paypal/fretefacil.rb",
     "lib/paypal/fretefacil/frete.rb",
     "lib/paypal/fretefacil/parser.rb",
     "lib/paypal/fretefacil/version.rb",
