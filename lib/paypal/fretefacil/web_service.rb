@@ -21,8 +21,7 @@ module PayPal
         request["SoapAction"] = "#{URL}/getPreco"
         request.body = request_body_for(frete)
 
-        response = http.request(request)
-        response.body
+        with_log(request) { http.request(request) }
       end
 
       private
@@ -41,6 +40,35 @@ module PayPal
             "</frete:getPreco>" +
           "</soapenv:Body>" +
         "</soapenv:Envelope>"
+      end
+
+      def with_log(request)
+        PayPal::FreteFacil.log format_request_message(request)
+        response = yield
+        PayPal::FreteFacil.log format_response_message(response)
+        response.body
+      end
+
+      def format_request_message(request)
+        message =  with_line_break { "PayPal-Frete-Facil Request:" }
+        message << with_line_break { URL }
+        message << with_line_break { format_headers_for(request) }
+        message << with_line_break { request.body }
+      end
+
+      def format_response_message(response)
+        message =  with_line_break { "PayPal-Frete-Facil Response:" }
+        message << with_line_break { "HTTP/#{response.http_version} #{response.code} #{response.message}" }
+        message << with_line_break { format_headers_for(response) }
+        message << with_line_break { response.body }
+      end
+
+      def format_headers_for(http)
+        http.each_header.map { |name, value| "#{name}: #{value}" }.join("\n")
+      end
+
+      def with_line_break
+        "#{yield}\n"
       end
     end
   end

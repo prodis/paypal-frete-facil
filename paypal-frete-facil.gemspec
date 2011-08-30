@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Prodis a.k.a. Fernando Hamasaki"]
-  s.date = %q{2011-08-22}
+  s.date = %q{2011-08-29}
   s.description = %q{Cálculo de frete utilizando o Web Service do Frete Fácil do PayPal.}
   s.email = %q{prodis@gmail.com}
   s.extra_rdoc_files = [
@@ -28,7 +28,8 @@ Gem::Specification.new do |s|
     "lib/paypal/fretefacil/version.rb",
     "lib/paypal/fretefacil/web_service.rb",
     "paypal-frete-facil.gemspec",
-    "spec/paypal-frete-facil_spec.rb",
+    "spec/paypal/fretefacil/frete_spec.rb",
+    "spec/paypal/fretefacil/parser_spec.rb",
     "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/prodis/paypal-frete-facil}
@@ -42,21 +43,27 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<nokogiri>, [">= 0"])
-      s.add_development_dependency(%q<rspec>, [">= 0"])
+      s.add_runtime_dependency(%q<log-me>, ["~> 0.0.2"])
+      s.add_runtime_dependency(%q<nokogiri>, ["~> 1.4.6"])
+      s.add_development_dependency(%q<rspec>, ["~> 2.6.0"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
-      s.add_development_dependency(%q<jeweler>, [">= 0"])
+      s.add_development_dependency(%q<jeweler>, ["~> 1.6.2"])
+      s.add_development_dependency(%q<rcov>, [">= 0"])
     else
-      s.add_dependency(%q<nokogiri>, [">= 0"])
-      s.add_dependency(%q<rspec>, [">= 0"])
+      s.add_dependency(%q<log-me>, ["~> 0.0.2"])
+      s.add_dependency(%q<nokogiri>, ["~> 1.4.6"])
+      s.add_dependency(%q<rspec>, ["~> 2.6.0"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
-      s.add_dependency(%q<jeweler>, [">= 0"])
+      s.add_dependency(%q<jeweler>, ["~> 1.6.2"])
+      s.add_dependency(%q<rcov>, [">= 0"])
     end
   else
-    s.add_dependency(%q<nokogiri>, [">= 0"])
-    s.add_dependency(%q<rspec>, [">= 0"])
+    s.add_dependency(%q<log-me>, ["~> 0.0.2"])
+    s.add_dependency(%q<nokogiri>, ["~> 1.4.6"])
+    s.add_dependency(%q<rspec>, ["~> 2.6.0"])
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])
-    s.add_dependency(%q<jeweler>, [">= 0"])
+    s.add_dependency(%q<jeweler>, ["~> 1.6.2"])
+    s.add_dependency(%q<rcov>, [">= 0"])
   end
 end
 

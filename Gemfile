@@ -1,5 +1,6 @@
 source "http://rubygems.org"
 
+gem "log-me", "~> 0.0.2"
 gem "nokogiri", "~> 1.4.6"
 
 group :development do
