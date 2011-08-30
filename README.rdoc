@@ -5,7 +5,7 @@ Cálculo de frete através do PayPal Frete Fácil (http://www.paypal-brasil.com.
 == Instalando
 
 === Gemfile
-  gem 'paypal-frete-facil'
+  gem 'paypal-frete-facil', '~> 0.1.0'
 
 === Instalação direta
   $ gem install paypal-frete-facil
@@ -22,8 +22,43 @@ Cálculo de frete através do PayPal Frete Fácil (http://www.paypal-brasil.com.
                                         :profundidade => 30,
                                         :peso => 0.3
 
-  frete.calcular  # => 13.873999999999999
-  frete.calculate # => 13.873999999999999
+  frete.calcular  # => 13.87
+  frete.calculate # => 13.87
+
+
+== Log
+
+Por padrão, cada chamada ao Web Service do PayPal Frete Fácil é logada em STDOUT, usando a gem {LogMe}[http://github.com/prodis/log-me].
+
+Para desabilitar o log ou configurar um outro mecanismo de log, você pode configurar o módulo PayPal::FreteFacil.
+
+  PayPal::FreteFacil.configure do |config|
+    config.log_enabled = false   # Desabilita o log
+    config.log_level = :debug    # Altera o nível do log
+    config.logger = Rails.logger # Usa o logger do Rails
+  end
+
+Exemplo de log:
+  I, [2011-08-29T22:00:52.624430 #2186]  INFO -- : PayPal-Frete-Facil Request:
+  https://ff.paypal-brasil.com.br/FretesPayPalWS/WSFretesPayPal
+  accept: */*
+  user-agent: Ruby
+  content-type: text/xml; charset=utf-8
+  soapaction: https://ff.paypal-brasil.com.br/FretesPayPalWS/WSFretesPayPal/getPreco
+  <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:frete="https://ff.paypal-brasil.com.br/FretesPayPalWS"><soapenv:Header /><soapenv:Body><frete:getPreco><cepOrigem>04094-050</cepOrigem><cepDestino>90619-900</cepDestino><largura>15</largura><altura>2</altura><profundidade>30</profundidade><peso>0.3</peso></frete:getPreco></soapenv:Body></soapenv:Envelope>
+
+  I, [2011-08-29T22:00:53.917895 #2186]  INFO -- : PayPal-Frete-Facil Response:
+  HTTP/1.1 200 OK
+  date: Tue, 30 Aug 2011 01:00:52 GMT
+  server: Apache/2.2.17 (Unix) mod_ssl/2.2.17 OpenSSL/0.9.8e-fips-rhel5 DAV/2 mod_jk/1.2.30
+  content-length: 271
+  content-type: text/xml;charset=utf-8
+  set-cookie: ROUTEID=.2; path=/
+  connection: close
+  <?xml version='1.0' encoding='UTF-8'?><S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/"><S:Body><ns2:getPrecoResponse xmlns:ns2="https://ff.paypal-brasil.com.br/FretesPayPalWS"><return>13.873999999999999</return></ns2:getPrecoResponse></S:Body></S:Envelope>
+
+
+== Informações adicionais
 
 === Maneiras de configurar atributos no construtor de Correios::Frete::Calculador
 
