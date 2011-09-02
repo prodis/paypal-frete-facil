@@ -50,17 +50,23 @@ module PayPal
       end
 
       def format_request_message(request)
-        message =  with_line_break { "PayPal-Frete-Facil Request:" }
-        message << with_line_break { URL }
-        message << with_line_break { format_headers_for(request) }
-        message << with_line_break { request.body }
+        format_message(request) do |message|
+          message =  with_line_break { "PayPal-Frete-Facil Request:" }
+          message << with_line_break { URL }
+        end
       end
 
       def format_response_message(response)
-        message =  with_line_break { "PayPal-Frete-Facil Response:" }
-        message << with_line_break { "HTTP/#{response.http_version} #{response.code} #{response.message}" }
-        message << with_line_break { format_headers_for(response) }
-        message << with_line_break { response.body }
+        format_message(response) do |message|
+          message =  with_line_break { "PayPal-Frete-Facil Response:" }
+          message << with_line_break { "HTTP/#{response.http_version} #{response.code} #{response.message}" }
+        end
+      end
+
+      def format_message(http)
+        message = yield
+        message << with_line_break { format_headers_for(http) } if PayPal::FreteFacil.log_level == :debug
+        message << with_line_break { http.body }
       end
 
       def format_headers_for(http)
