@@ -12,19 +12,33 @@ module PayPal
       end
 
       def request(frete)
+        http = get_http
+
+        request = get_request(frete)
+        log_request(request)
+
+        response = http.request(request)
+        log_response(response)
+
+        response.body
+      end
+
+      private
+
+      def get_http
         http = Net::HTTP.new(@uri.host, @uri.port)
         http.use_ssl = true
         http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+        http
+      end
 
+      def get_request(frete)
         request = Net::HTTP::Post.new(@uri.path)
         request["Content-Type"] = "text/xml; charset=utf-8"
         request["SoapAction"] = "#{URL}/getPreco"
         request.body = request_body_for(frete)
-
-        with_log(request) { http.request(request) }
+        request
       end
-
-      private
 
       def request_body_for(frete)
         "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:frete=\"https://ff.paypal-brasil.com.br/FretesPayPalWS\">" +
@@ -42,25 +56,22 @@ module PayPal
         "</soapenv:Envelope>"
       end
 
-      def with_log(request)
-        PayPal::FreteFacil.log format_request_message(request)
-        response = yield
-        PayPal::FreteFacil.log format_response_message(response)
-        response.body
-      end
-
-      def format_request_message(request)
-        format_message(request) do |message|
+      def log_request(request)
+        message = format_message(request) do
           message =  with_line_break { "PayPal-Frete-Facil Request:" }
           message << with_line_break { URL }
         end
+
+        PayPal::FreteFacil.log(message)
       end
 
-      def format_response_message(response)
-        format_message(response) do |message|
+      def log_response(response)
+        message = format_message(response) do
           message =  with_line_break { "PayPal-Frete-Facil Response:" }
           message << with_line_break { "HTTP/#{response.http_version} #{response.code} #{response.message}" }
         end
+
+        PayPal::FreteFacil.log(message)
       end
 
       def format_message(http)
