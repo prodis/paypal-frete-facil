@@ -16,7 +16,7 @@ require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "paypal-frete-facil"
-  gem.homepage = "http://github.com/prodis/paypal-frete-facil"
+  gem.homepage = "http://prodis.blog.br/2011/09/04/gem-para-calculo-de-frete-do-paypal-frete-facil"
   gem.license = "MIT"
   gem.summary = %Q{Cálculo de frete do PayPal Frete Fácil.}
   gem.description = %Q{Cálculo de frete através do PayPal Frete Fácil (http://www.paypal-brasil.com.br/fretefacil).}
