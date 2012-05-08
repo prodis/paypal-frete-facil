@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/">
+  <S:Body>
+    <ns2:getPrecoResponse xmlns:ns2="https://ff.paypal-brasil.com.br/FretesPayPalWS">
+      <return>[PRICE]</return>
+    </ns2:getPrecoResponse>
+  </S:Body>
+</S:Envelope>

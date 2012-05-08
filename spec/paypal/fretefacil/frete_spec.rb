@@ -42,18 +42,19 @@ describe PayPal::FreteFacil::Frete do
     end
   end
 
-  describe "#calcular" do
-    before :each do
-      web_service = PayPal::FreteFacil::WebService.new
-      parser = PayPal::FreteFacil::Parser.new
-      @frete = PayPal::FreteFacil::Frete.new(:web_service => web_service, :parser => parser)
+  [:calcular, :calculate].each do |method_name|
+    describe method_name do
+      around do |example|
+        PayPal::FreteFacil.configure { |config| config.log_enabled = false }
+        example.run
+        PayPal::FreteFacil.configure { |config| config.log_enabled = true }
+      end
       
-      web_service.stub(:request).with(@frete).and_return('<?xml version="1.0" encoding="UTF-8"?><S:Envelope xmlns:S="http://schemas.xmlsoap.org/soap/envelope/"><S:Body><ns2:getPrecoResponse xmlns:ns2="https://ff.paypal-brasil.com.br/FretesPayPalWS"><return>8.19</return></ns2:getPrecoResponse></S:Body></S:Envelope>')
-      parser.stub(:parser).and_return(8.19)
-    end
-
-    it "returns shipping price" do
-      @frete.calcular.should == 8.19
+      it "returns shipping price" do
+        fake_request(10.23)
+        frete = PayPal::FreteFacil::Frete.new
+        frete.send(method_name).should == 10.23
+      end
     end
   end
 end
