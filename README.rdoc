@@ -5,7 +5,7 @@ Cálculo de frete através do PayPal Frete Fácil (http://www.paypal-brasil.com.
 == Instalando
 
 === Gemfile
-  gem 'paypal-frete-facil', '~> 0.2.2'
+  gem 'paypal-frete-facil'
 
 === Instalação direta
   $ gem install paypal-frete-facil
