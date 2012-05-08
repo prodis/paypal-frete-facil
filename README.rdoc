@@ -32,7 +32,7 @@ Por padrão, cada chamada ao Web Service do PayPal Frete Fácil é logada em STD
 
 Exemplo de log:
   I, [2011-08-29T22:00:52.624430 #2186]  INFO -- : PayPal-Frete-Facil Request:
-  https://ff.paypal-brasil.com.br/FretesPayPalWS/WSFretesPayPal
+  POST https://ff.paypal-brasil.com.br/FretesPayPalWS/WSFretesPayPal
   <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:frete="https://ff.paypal-brasil.com.br/FretesPayPalWS"><soapenv:Header /><soapenv:Body><frete:getPreco><cepOrigem>04094-050</cepOrigem><cepDestino>90619-900</cepDestino><largura>15</largura><altura>2</altura><profundidade>30</profundidade><peso>0.3</peso></frete:getPreco></soapenv:Body></soapenv:Envelope>
 
   I, [2011-08-29T22:00:53.917895 #2186]  INFO -- : PayPal-Frete-Facil Response:
@@ -41,7 +41,7 @@ Exemplo de log:
 
 Se você configurar o nível de log como :debug, serão logados também todos os cabeçalhos HTTP da requisição e da resposta:
   D, [2011-08-29T22:00:52.624430 #2186]  DEBUG -- : PayPal-Frete-Facil Request:
-  https://ff.paypal-brasil.com.br/FretesPayPalWS/WSFretesPayPal
+  POST https://ff.paypal-brasil.com.br/FretesPayPalWS/WSFretesPayPal
   accept: */*
   user-agent: Ruby
   content-type: text/xml; charset=utf-8
@@ -104,7 +104,7 @@ Para desabilitar o log, mudar o nível do log ou configurar um outro mecanismo d
 
 {Prodis a.k.a. Fernando Hamasaki}[http://prodis.blog.br]
 
-Copyright (c) 2011 Prodis
+Copyright (c) 2011-2012 Prodis
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
