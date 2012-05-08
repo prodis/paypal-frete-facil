@@ -22,7 +22,7 @@ module PayPal
       end
 
       def web_service
-        @web_service ||= PayPal::FreteFacil::WebService.new
+        PayPal::FreteFacil::WebService.new(self)
       end
 
       def parser
@@ -30,7 +30,7 @@ module PayPal
       end
 
       def calcular
-        response = web_service.request(self)
+        response = web_service.request!
         parser.parse(response)
       end
 

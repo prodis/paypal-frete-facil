@@ -7,14 +7,15 @@ module PayPal
     class WebService
       URL = "https://ff.paypal-brasil.com.br/FretesPayPalWS/WSFretesPayPal"
 
-      def initialize
+      def initialize(frete)
         @uri = URI.parse(URL)
+        @frete = frete
       end
 
-      def request(frete)
-        http = get_http
+      def request!
+        http = build_http
 
-        request = get_request(frete)
+        request = build_request
         log_request(request)
 
         response = http.request(request)
@@ -25,32 +26,32 @@ module PayPal
 
       private
 
-      def get_http
+      def build_http
         http = Net::HTTP.new(@uri.host, @uri.port)
         http.use_ssl = true
         http.verify_mode = OpenSSL::SSL::VERIFY_NONE
         http
       end
 
-      def get_request(frete)
+      def build_request
         request = Net::HTTP::Post.new(@uri.path)
         request["Content-Type"] = "text/xml; charset=utf-8"
         request["SoapAction"] = "#{URL}/getPreco"
-        request.body = request_body_for(frete)
+        request.body = request_body
         request
       end
 
-      def request_body_for(frete)
+      def request_body
         "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:frete=\"https://ff.paypal-brasil.com.br/FretesPayPalWS\">" +
           "<soapenv:Header />" +
           "<soapenv:Body>" +
             "<frete:getPreco>" +
-              "<cepOrigem>#{frete.cep_origem}</cepOrigem>" +
-              "<cepDestino>#{frete.cep_destino}</cepDestino>" +
-              "<largura>#{frete.largura}</largura>" +
-              "<altura>#{frete.altura}</altura>" +
-              "<profundidade>#{frete.profundidade}</profundidade>" +
-              "<peso>#{frete.peso}</peso>" +
+              "<cepOrigem>#{@frete.cep_origem}</cepOrigem>" +
+              "<cepDestino>#{@frete.cep_destino}</cepDestino>" +
+              "<largura>#{@frete.largura}</largura>" +
+              "<altura>#{@frete.altura}</altura>" +
+              "<profundidade>#{@frete.profundidade}</profundidade>" +
+              "<peso>#{@frete.peso}</peso>" +
             "</frete:getPreco>" +
           "</soapenv:Body>" +
         "</soapenv:Envelope>"
@@ -59,7 +60,7 @@ module PayPal
       def log_request(request)
         message = format_message(request) do
           message =  with_line_break { "PayPal-Frete-Facil Request:" }
-          message << with_line_break { URL }
+          message << with_line_break { "POST #{URL}" }
         end
 
         PayPal::FreteFacil.log(message)
