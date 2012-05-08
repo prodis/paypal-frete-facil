@@ -22,9 +22,7 @@ describe PayPal::FreteFacil::Frete do
       :largura => 15,
       :altura => 2,
       :profundidade => 30,
-      :peso => 0.321,
-      :web_service => PayPal::FreteFacil::WebService.new,
-      :parser => PayPal::FreteFacil::Parser.new
+      :peso => 0.321
     }.each do |attr, value|
       context "when #{attr} is supplied" do
         it "sets #{attr}" do
