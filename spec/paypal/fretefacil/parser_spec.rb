@@ -7,15 +7,8 @@ describe PayPal::FreteFacil::Parser do
 
     context "when XML is correct" do
       it "returns shipping price" do
-        xml = response_body(8.19)
-        parser.parse(xml).should == 8.19
-      end
-
-      context "and shipping price has more then two decimal places" do
-        it "returns shipping price rounded to two decimal places" do
-          xml = response_body(8.2261234567)
-          parser.parse(xml).should == 8.23
-        end
+        xml = response_body(8.2261234567)
+        parser.parse(xml).should == 8.2261234567
       end
     end
 
