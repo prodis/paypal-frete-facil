@@ -48,9 +48,9 @@ module PayPal
             "<frete:getPreco>" +
               "<cepOrigem>#{@frete.cep_origem}</cepOrigem>" +
               "<cepDestino>#{@frete.cep_destino}</cepDestino>" +
-              "<largura>#{@frete.largura}</largura>" +
-              "<altura>#{@frete.altura}</altura>" +
-              "<profundidade>#{@frete.profundidade}</profundidade>" +
+              "<largura>#{@frete.largura.round}</largura>" +
+              "<altura>#{@frete.altura.round}</altura>" +
+              "<profundidade>#{@frete.profundidade.round}</profundidade>" +
               "<peso>#{@frete.peso}</peso>" +
             "</frete:getPreco>" +
           "</soapenv:Body>" +
