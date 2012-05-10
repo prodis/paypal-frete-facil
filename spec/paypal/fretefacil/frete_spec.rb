@@ -9,6 +9,7 @@ describe PayPal::FreteFacil::Frete do
       { :largura => 0,
         :altura => 0,
         :profundidade => 0,
+        :comprimento => 0,
         :peso => 0.0
       }.each do |attr, value|
         it attr do
@@ -22,6 +23,7 @@ describe PayPal::FreteFacil::Frete do
       :largura => 15,
       :altura => 2,
       :profundidade => 30,
+      :comprimento => 30,
       :peso => 0.321
     }.each do |attr, value|
       context "when #{attr} is supplied" do

@@ -6,6 +6,9 @@ module PayPal
       attr_accessor :largura, :altura, :profundidade
       attr_accessor :peso
 
+      alias comprimento  profundidade
+      alias comprimento= profundidade=
+
       DEFAULT_OPTIONS = {
         :largura => 0,
         :altura => 0,
