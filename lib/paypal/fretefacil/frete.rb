@@ -34,7 +34,8 @@ module PayPal
 
       def calcular
         response = web_service.request!
-        parser.parse(response)
+        value = parser.parse(response)
+        PayPal::FreteFacil::Resultado.new(value)
       end
 
       alias calculate calcular

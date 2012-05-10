@@ -50,10 +50,10 @@ describe PayPal::FreteFacil::Frete do
         PayPal::FreteFacil.configure { |config| config.log_enabled = true }
       end
       
-      it "returns shipping price" do
+      it "returns shipping price result" do
         fake_request(10.23)
         frete = PayPal::FreteFacil::Frete.new
-        frete.send(method_name).should == 10.23
+        frete.send(method_name).valor.should == 10.23
       end
     end
   end
