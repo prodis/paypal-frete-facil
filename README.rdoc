@@ -22,8 +22,24 @@ Cálculo de frete através do PayPal Frete Fácil (http://www.paypal-brasil.com.
                                         :profundidade => 30,
                                         :peso => 0.3
 
-  frete.calcular  # => 13.87
-  frete.calculate # => 13.87
+  resultado = frete.calcular
+  resultado.valor # => 14.77
+
+Verificação de sucesso e erro:
+
+  frete.altura = 200
+
+  resultado = frete.calcular
+  resultado.sucesso? # => false
+  resultado.erro?    # => true
+  resultado.msg_erro # => "Não foi possível calcular o frete."
+
+Usando a interface pública em inglês:
+
+  resultado = frete.calculate
+  resultado.success?  # => true
+  resultado.error?    # => false
+  resultado.error_msg # => ""
 
 
 == Log
@@ -94,9 +110,15 @@ Para desabilitar o log, mudar o nível do log ou configurar um outro mecanismo d
 ==== String
   cep_origem, cep_destino
 ==== Fixnum
-  largura, altura, profundidade
+  largura, altura, profundidade (comprimento)
 ==== Float
   peso
+
+
+=== Outros detalhes da classe PayPal::FreteFacil::Frete
+* Os atributos *profundidade* e *comprimento* são a mesma coisa, configurando um irá configurar também o outro.
+* Os atributos *largura*, *altura* e *profundidade* também aceitam valores com casas decimais (<em>float</em>), mas para fazer o cálculo será feito um <em>round</em> de seus valores.
+
 
 == Copyright
 
