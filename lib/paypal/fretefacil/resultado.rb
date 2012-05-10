@@ -3,6 +3,7 @@ module PayPal
   module FreteFacil
     class Resultado
       attr_reader :valor
+      alias value valor
 
       def initialize(valor)
         if valor > 0

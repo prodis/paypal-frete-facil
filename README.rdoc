@@ -36,10 +36,11 @@ Verificação de sucesso e erro:
 
 Usando a interface pública em inglês:
 
-  resultado = frete.calculate
-  resultado.success?  # => true
-  resultado.error?    # => false
-  resultado.error_msg # => ""
+  result = frete.calculate
+  result.value     # => 14.77
+  result.success?  # => true
+  result.error?    # => false
+  result.error_msg # => ""
 
 
 == Log
