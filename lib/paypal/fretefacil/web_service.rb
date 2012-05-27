@@ -7,9 +7,9 @@ module PayPal
     class WebService
       URL = "https://ff.paypal-brasil.com.br/FretesPayPalWS/WSFretesPayPal"
 
-      def initialize(frete)
+      def initialize(shipping)
         @uri = URI.parse(URL)
-        @frete = frete
+        @shipping = shipping
       end
 
       def request!
@@ -42,17 +42,17 @@ module PayPal
       end
 
       def request_body
-        "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:frete=\"https://ff.paypal-brasil.com.br/FretesPayPalWS\">" +
+        "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:shipping=\"https://ff.paypal-brasil.com.br/FretesPayPalWS\">" +
           "<soapenv:Header />" +
           "<soapenv:Body>" +
-            "<frete:getPreco>" +
-              "<cepOrigem>#{@frete.cep_origem}</cepOrigem>" +
-              "<cepDestino>#{@frete.cep_destino}</cepDestino>" +
-              "<largura>#{@frete.largura.round}</largura>" +
-              "<altura>#{@frete.altura.round}</altura>" +
-              "<profundidade>#{@frete.profundidade.round}</profundidade>" +
-              "<peso>#{@frete.peso}</peso>" +
-            "</frete:getPreco>" +
+            "<shipping:getPreco>" +
+              "<cepOrigem>#{@shipping.from_zip}</cepOrigem>" +
+              "<cepDestino>#{@shipping.to_zip}</cepDestino>" +
+              "<largura>#{@shipping.width.round}</largura>" +
+              "<altura>#{@shipping.height.round}</altura>" +
+              "<profundidade>#{@shipping.length.round}</profundidade>" +
+              "<peso>#{@shipping.weight}</peso>" +
+            "</shipping:getPreco>" +
           "</soapenv:Body>" +
         "</soapenv:Envelope>"
       end
