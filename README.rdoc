@@ -19,7 +19,7 @@ Cálculo de frete através do PayPal Frete Fácil (http://www.paypal-brasil.com.
                                         :cep_destino => "90619-900",
                                         :largura => 15,
                                         :altura => 2,
-                                        :profundidade => 30,
+                                        :comprimento => 30,
                                         :peso => 0.3
 
   resultado = frete.calcular
@@ -92,7 +92,7 @@ Para desabilitar o log, mudar o nível do log ou configurar um outro mecanismo d
                                         :cep_destino => "90619-900",
                                         :largura => 15,
                                         :altura => 2,
-                                        :profundidade => 30,
+                                        :comprimento => 30,
                                         :peso => 0.3
 
 ==== Com um bloco
@@ -101,7 +101,7 @@ Para desabilitar o log, mudar o nível do log ou configurar um outro mecanismo d
     f.cep_destino = "90619-900"
     f.largura = 15
     f.altura = 2
-    f.profundidade = 30
+    f.comprimento = 30
     f.peso = 0.3
   end
 
@@ -111,14 +111,14 @@ Para desabilitar o log, mudar o nível do log ou configurar um outro mecanismo d
 ==== String
   cep_origem, cep_destino
 ==== Fixnum
-  largura, altura, profundidade (comprimento)
+  largura, altura, comprimento (profundidade)
 ==== Float
   peso
 
 
 === Outros detalhes da classe PayPal::FreteFacil::Frete
-* Os atributos *profundidade* e *comprimento* são a mesma coisa, configurando um irá configurar também o outro.
-* Os atributos *largura*, *altura* e *profundidade* também aceitam valores com casas decimais (<em>float</em>), mas para fazer o cálculo será feito um <em>round</em> de seus valores.
+* Os atributos *comprimento* e *profundidade* são a mesma coisa, configurando um irá configurar também o outro.
+* Os atributos *largura*, *altura* e *comprimento* também aceitam valores com casas decimais (<em>float</em>), mas para fazer o cálculo será feito um <em>round</em> de seus valores.
 
 
 == Copyright

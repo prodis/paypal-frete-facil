@@ -3,16 +3,16 @@ module PayPal
   module FreteFacil
     class Frete
       attr_accessor :cep_origem, :cep_destino
-      attr_accessor :largura, :altura, :profundidade
+      attr_accessor :largura, :altura, :comprimento
       attr_accessor :peso
 
-      alias comprimento  profundidade
-      alias comprimento= profundidade=
+      alias profundidade  comprimento
+      alias profundidade= comprimento=
 
       DEFAULT_OPTIONS = {
         :largura => 0,
         :altura => 0,
-        :profundidade => 0,
+        :comprimento => 0,
         :peso => 0.0
       }
 
