@@ -3,8 +3,8 @@ module PayPal
   module FreteFacil
     class Shipping
       attr_accessor :from_zip, :to_zip
-      attr_accessor :width, :height, :length
-      attr_accessor :weight 
+      attr_accessor :width, :height, :length, :weight
+      attr_writer   :result_class
 
       DEFAULT_OPTIONS = {
         :width  => 0,
@@ -21,6 +21,14 @@ module PayPal
         yield self if block_given?
       end
 
+      def calculate
+        response = web_service.request!
+        value = parser.parse(response)
+        result_class.new(value)
+      end
+
+      private
+
       def web_service
         PayPal::FreteFacil::WebService.new(self)
       end
@@ -29,12 +37,9 @@ module PayPal
         @parser ||= PayPal::FreteFacil::Parser.new
       end
 
-      def calculate
-        response = web_service.request!
-        value = parser.parse(response)
-        PayPal::FreteFacil::ShippingResult.new(value)
+      def result_class
+        @result_class ||= PayPal::FreteFacil::ShippingResult
       end
     end
   end
 end
-

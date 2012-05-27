@@ -1,44 +1,43 @@
 # encoding: UTF-8
+require 'forwardable'
+
 module PayPal
   module FreteFacil
     class Frete
-      attr_accessor :cep_origem, :cep_destino
-      attr_accessor :largura, :altura, :comprimento
-      attr_accessor :peso
+      extend Forwardable
 
-      alias profundidade  comprimento
-      alias profundidade= comprimento=
+      # Attribute delegates
+      { :from_zip => :cep_origem,
+        :to_zip => :cep_destino,
+        :width => :largura,
+        :height => :altura,
+        :length => :comprimento,
+        :weight => :peso
+      }.each do |original, delegate|
+        def_delegator :@shipping, original, delegate
+        def_delegator :@shipping, "#{original}=".to_sym, "#{delegate}=".to_sym
+      end
 
-      DEFAULT_OPTIONS = {
-        :largura => 0,
-        :altura => 0,
-        :comprimento => 0,
-        :peso => 0.0
-      }
+      # Method delegates
+      def_delegator  :@shipping, :calculate, :calcular
+      def_delegators :@shipping, :web_service, :parser
 
       def initialize(options = {})
-        DEFAULT_OPTIONS.merge(options).each do |attr, value|
+        create_shipping
+
+        options.each do |attr, value|
           self.send("#{attr}=", value)
         end
 
         yield self if block_given?
       end
 
-      def web_service
-        PayPal::FreteFacil::WebService.new(self)
-      end
+      private
 
-      def parser
-        @parser ||= PayPal::FreteFacil::Parser.new
+      def create_shipping
+        @shipping = PayPal::FreteFacil::Shipping.new
+        @shipping.result_class = PayPal::FreteFacil::FreteResultado
       end
-
-      def calcular
-        response = web_service.request!
-        value = parser.parse(response)
-        PayPal::FreteFacil::Resultado.new(value)
-      end
-
-      alias calculate calcular
     end
   end
 end
