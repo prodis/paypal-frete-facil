@@ -15,6 +15,28 @@ Cálculo de frete através do PayPal Frete Fácil (http://www.paypal-brasil.com.
 
   require 'paypal-frete-facil'
 
+  shipping = PayPal::FreteFacil::Shipping.new :from_zip => "04094-050",
+                                              :to_zip => "90619-900",
+                                              :width => 15,
+                                              :height => 2,
+                                              :length => 30,
+                                              :weight => 0.3
+
+  result = shipping.calculate
+  result.value # => 14.77
+
+Verificação de sucesso e erro:
+
+  shipping.height = 200
+
+  result = shipping.calculate
+  result.success? # => false
+  result.error?   # => true
+  result.error_message # => "Não foi possível calcular o frete."
+  result.value # => 0
+
+Usando a interface pública em português:
+
   frete = PayPal::FreteFacil::Frete.new :cep_origem => "04094-050",
                                         :cep_destino => "90619-900",
                                         :largura => 15,
@@ -24,23 +46,9 @@ Cálculo de frete através do PayPal Frete Fácil (http://www.paypal-brasil.com.
 
   resultado = frete.calcular
   resultado.valor # => 14.77
-
-Verificação de sucesso e erro:
-
-  frete.altura = 200
-
-  resultado = frete.calcular
-  resultado.sucesso? # => false
-  resultado.erro?    # => true
-  resultado.msg_erro # => "Não foi possível calcular o frete."
-
-Usando a interface pública em inglês:
-
-  result = frete.calculate
-  result.value     # => 14.77
-  result.success?  # => true
-  result.error?    # => false
-  result.error_msg # => ""
+  resultado.sucesso? # => true
+  resultado.erro?    # => false
+  resultado.mensagem_erro # => ""
 
 
 == Log
@@ -85,25 +93,37 @@ Para desabilitar o log, mudar o nível do log ou configurar um outro mecanismo d
 
 == Informações adicionais
 
-=== Maneiras de configurar atributos no construtor de PayPal::FreteFacil::Frete
+=== Maneiras de configurar atributos no construtor de PayPal::FreteFacil::Shipping (o mesmo vale para a classe PayPal::FreteFacil::Frete)
 
 ==== Com um hash
-  frete = PayPal::FreteFacil::Frete.new :cep_origem => "04094-050",
-                                        :cep_destino => "90619-900",
-                                        :largura => 15,
-                                        :altura => 2,
-                                        :comprimento => 30,
-                                        :peso => 0.3
+  shipping = PayPal::FreteFacil::Shipping.new :from_zip => "04094-050",
+                                              :to_zip => "90619-900",
+                                              :width => 15,
+                                              :height => 2,
+                                              :length => 30,
+                                              :weight => 0.3
 
 ==== Com um bloco
-  frete = PayPal::FreteFacil::Frete.new do |f|
-    f.cep_origem = "04094-050"
-    f.cep_destino = "90619-900"
-    f.largura = 15
-    f.altura = 2
-    f.comprimento = 30
-    f.peso = 0.3
+  shipping = PayPal::FreteFacil::Shipping.new do |s|
+    s.from_zip = "04094-050"
+    s.to_zip = "90619-900"
+    s.width = 15
+    s.height = 2
+    s.length = 30
+    s.weight = 0.3
   end
+
+=== Atributos de PayPal::FreteFacil::Shipping
+
+==== String
+  from_zip, to_zip
+==== Fixnum
+  width, height, length
+==== Float
+  weight
+
+=== Observações da classe PayPal::FreteFacil::Shipping
+* Os atributos *width*, *height* e *length* também aceitam valores com casas decimais (<em>float</em>), mas para fazer o cálculo do frete será feito um <em>round</em> de seus valores.
 
 
 === Atributos de PayPal::FreteFacil::Frete
@@ -111,14 +131,12 @@ Para desabilitar o log, mudar o nível do log ou configurar um outro mecanismo d
 ==== String
   cep_origem, cep_destino
 ==== Fixnum
-  largura, altura, comprimento (profundidade)
+  largura, altura, comprimento
 ==== Float
   peso
 
-
-=== Outros detalhes da classe PayPal::FreteFacil::Frete
-* Os atributos *comprimento* e *profundidade* são a mesma coisa, configurando um irá configurar também o outro.
-* Os atributos *largura*, *altura* e *comprimento* também aceitam valores com casas decimais (<em>float</em>), mas para fazer o cálculo será feito um <em>round</em> de seus valores.
+=== Observações da classe PayPal::FreteFacil::Frete
+* Os atributos *largura*, *altura* e *comprimento* também aceitam valores com casas decimais (<em>float</em>), mas para fazer o cálculo do frete será feito um <em>round</em> de seus valores.
 
 
 == Copyright
