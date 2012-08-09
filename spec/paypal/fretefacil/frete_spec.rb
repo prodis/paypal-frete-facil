@@ -48,7 +48,7 @@ describe PayPal::FreteFacil::Frete do
     end
 
     it "returns shipping price result" do
-      fake_request(10.23)
+      mock_request(10.23)
       frete = PayPal::FreteFacil::Frete.new
       frete.calcular.valor.should == 10.23
     end

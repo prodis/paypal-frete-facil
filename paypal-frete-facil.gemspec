@@ -1,5 +1,6 @@
 # -*- encoding: utf-8 -*-
-require File.expand_path('../lib/paypal/fretefacil/version', __FILE__)
+$:.push File.expand_path('../lib', __FILE__)
+require 'paypal/fretefacil/version'
 
 Gem::Specification.new do |gem|
   gem.name        = "paypal-frete-facil"
@@ -19,10 +20,10 @@ Gem::Specification.new do |gem|
   gem.platform              = Gem::Platform::RUBY
   gem.required_ruby_version = Gem::Requirement.new(">= 1.8.7")
 
-  gem.add_dependency "log-me"
+  gem.add_dependency "log-me",   "~> 0.0.4"
   gem.add_dependency "nokogiri", "~> 1.5"
 
-  gem.add_development_dependency "fakeweb", "~> 1.3"
   gem.add_development_dependency "rake"
-  gem.add_development_dependency "rspec", "~> 2.11"
+  gem.add_development_dependency "rspec",   "~> 2.11"
+  gem.add_development_dependency "webmock", "~> 1.8"
 end

@@ -48,7 +48,7 @@ describe PayPal::FreteFacil::Shipping do
     end
 
     it "returns shipping price result" do
-      fake_request(10.23)
+      mock_request(10.23)
       shipping = PayPal::FreteFacil::Shipping.new
       shipping.calculate.value.should == 10.23
     end
